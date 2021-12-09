@@ -47,4 +47,19 @@ class SessionsRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function findWeekSessions()
+    {
+        $monday = date("Y-m-d", strtotime("last monday"));
+        $friday = date("Y-m-d", strtotime("this sunday"));
+
+
+        return $this->createQueryBuilder('s')
+            ->andWhere('s.date >= :monday and s.date <= :friday')
+            ->setParameter('monday', $monday)
+            ->setParameter('friday', $friday)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
 }

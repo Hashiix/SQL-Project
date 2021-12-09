@@ -3,7 +3,22 @@
 {% block title %}SQL Project{% endblock %}
 
 {% block body %}
+    <div class="container d-flex justify-content-around align-items-center p-3">
     {% for day in days %}
-        {{ day.name }}
+        <div class="day d-flex flex-column text-center">
+            <h3>{{ day.name }}</h3>
+            {% for session in sessions %}
+                <div class="card text-center m-1" style="width: 10rem;">
+                    <div class="card-body">
+                        <p class="card-text">{{ session.slot.slot }}</p>
+                        <p class="card-text">{% for m in session.movie %}{{ m.name }}{% endfor %}</p>
+                        <p class="card-text">{% for m in session.movie %}Durée : {{ m.length }}{% endfor %}</p>
+                        <p class="card-text">Places : {{ session.seatsleft }}</p>
+                        <a href="#" class="btn btn-primary">Réserver</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
     {% endfor %}
+    </div>
 {% endblock %}
